@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
 from django.contrib.auth import login
+from django.contrib import messages
+from django.urls import reverse
+from .forms import CustomUserCreationForm
 
 def register(request):
     if request.method == "POST":
@@ -8,7 +10,10 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect("/course")
+            messages.success(request, "Registration successful! Welcome 🎉")
+            return redirect(reverse("course"))  # Gunakan reverse() untuk URL dinamis
+        else:
+            messages.error(request, "Registration failed. Please check the form.")
     else:
         form = CustomUserCreationForm()
 
