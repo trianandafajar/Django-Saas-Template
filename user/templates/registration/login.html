@@ -41,7 +41,7 @@
             autocomplete="off"
           />
           <div class="input-group-append">
-            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword()">
+            <button type="button" class="btn btn-outline-secondary" onclick="togglePassword(this)">
               Show
             </button>
           </div>
@@ -60,4 +60,13 @@
   </div>
 </div>
 
-<!--
+<!-- Toggle Password Script -->
+<script>
+  function togglePassword(button) {
+    const input = document.getElementById('id_password');
+    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+    input.setAttribute('type', type);
+    button.textContent = type === 'password' ? 'Show' : 'Hide';
+  }
+</script>
+{% endblock %}
